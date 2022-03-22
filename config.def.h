@@ -1,4 +1,4 @@
-/*  ____ _____  */
+/*  ____ _____Rehashed */
 /* |  _ \_   _|  Derek Taylor (DistroTube) */
 /* | | | || |  	http://www.youtube.com/c/DistroTube */
 /* | |_| || |  	http://www.gitlab.com/dwt1/ */
@@ -8,7 +8,7 @@
 /* appearance */
 static const unsigned int borderpx = 2;   /* border pixel of windows */
 static const unsigned int snap     = 32;  /* snap pixel */
-static const unsigned int gappx    = 6;   /* pixel gap between clients */
+static const unsigned int gappx    = 2;   /* pixel gap between clients */
 static const int showbar           = 1;   /* 0 means no bar */
 static const int topbar            = 1;   /* 0 means bottom bar */
 static const int horizpadbar       = 6;   /* horizontal padding for statusbar */
@@ -49,16 +49,34 @@ static const unsigned int alphas[][3] = {
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
 /* static const char *tags[] = { "", "", "", "", "", "", "", "", "" }; */
-static const char *tags[] = { "dev", "www", "sys", "doc", "vbox", "chat", "mus", "vid", "gfx" };
+static const char *tags[] = { "zen", "sys", "dev", "www", "doc", "media", "chat", "arr", "gfx" };
 
-static const Rule rules[] = {
-	/* xprop(1):
+
+/* Run xprop and extract:
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
-	 */
+*/ 
+static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	// Day planners
+	{ "obsidian",		NULL,		NULL,		1,			0,		-1 },
+	// Dev tools
+	{ "code-oss",		NULL,		NULL,		1 << 2,		0,		-1 },
+	// Browsers
+	{ "firefox",		NULL,		NULL,		1 << 3,		0,		-1 },
+	// Document Reader
+	{ "libreoffice",	NULL,		NULL,		1 << 4,		0,		-1 },
+	// Media Players
+	{ "spotify",		NULL,		NULL,		1 << 5,		0,		-1 },
+	{ "cantata",		NULL,		NULL,		1 << 5,		0,		-1 },
+	{ "Parole",			NULL,		NULL,		1 << 5,		0,		-1 },
+	// Social Media 
+	{ "discord",		NULL,		NULL,		1 << 6,		0,		-1 },
+	{ "TelegramDesktop",NULL,		NULL,		1 << 6,		0,		-1 },
+	// Arr
+	{ "qBittorrent",	NULL,		NULL,		1<<7,		0,		-1 },
+	// gfx
+	{ "Gimp",			NULL,		NULL,		1<<8,		0,		-1 },
 };
 
 /* layout(s) */
@@ -95,17 +113,16 @@ static const char *dmenucmd[]    = { "dmenu_run", "-p", "Run: ", NULL };
 /* If you are using the dmenu-distrotube-git program, use the following for a cooler dmenu! */
 /* static const char *dmenucmd[]    = { "dmenu_run", "-g", "10", "-l", "48", "-p", "Run: ", NULL }; */
 
-/* the st terminal with tabbed */
-static const char *termcmd[]     = { "st", NULL };
+/* the alacritty terminal */
+static const char *termcmd[]     = { "alacritty", NULL };
 /* An alternative way to launch st along with the fish shell */
 /* static const char *termcmd[]     = { "st", "-e fish", NULL }; */
-static const char *tabtermcmd[]  = { "tabbed", "-r", "2", "st", "-w", "''", NULL };
+// static const char *tabtermcmd[]  = { "tabbed", "-r", "2", "st", "-w", "''", NULL };
 
 static Key keys[] = {
 	/* modifier             chain key  key        function        argument */
-	{ MODKEY|ShiftMask,     -1,        XK_Return, spawn,          {.v = dmenucmd } },
-	{ MODKEY,               -1,        XK_Return, spawn,          {.v = termcmd } },
-	{ Mod1Mask,             -1,        XK_Return, spawn,          {.v = tabtermcmd } },
+	{ MODKEY|ShiftMask,     -1,        XK_Return, spawn,          {.v = termcmd} },
+	{ MODKEY,               -1,        XK_Return, spawn,          {.v = dmenucmd  } },
 	{ MODKEY,               -1,        XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,     -1,        XK_j,      rotatestack,    {.i = +1 } },
 	{ MODKEY|ShiftMask,     -1,        XK_k,      rotatestack,    {.i = -1 } },
@@ -131,39 +148,28 @@ static Key keys[] = {
 	{ MODKEY,               -1,        XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,               -1,        XK_g,      setlayout,      {.v = &layouts[3]} },
 
-	{ MODKEY,               -1,        XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,     -1,        XK_0,      tag,            {.ui = ~0 } },
+	{ MODKEY,               -1,        XK_0,      view,           {.ui = ~0 } }, //view all tags
+	{ MODKEY|ShiftMask,     -1,        XK_0,      tag,            {.ui = ~0 } }, //make window appear in all tags
 
     /* Switching between monitors */
 	{ MODKEY,               -1,        XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,               -1,        XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,     -1,        XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,     -1,        XK_period, tagmon,         {.i = +1 } },
-	
+
+	/*Keybindings for SUPER + Shift + Key*/
+	{ MODKEY|ShiftMask,      -1,        XK_d,      spawn,          CMD("discord") },
+	{ MODKEY|ShiftMask,      -1,        XK_e,      spawn,          CMD("thunar") },
+	{ MODKEY|ShiftMask,      -1,        XK_f,      spawn,          CMD("firefox") },
+	{ MODKEY|ShiftMask,      -1,        XK_k,      spawn,          CMD("keepassxc") },
+	{ MODKEY|ShiftMask,      -1,        XK_m,      spawn,          CMD("cantata") },
+	{ MODKEY|ShiftMask,      -1,        XK_o,      spawn,          CMD("obsidian") },
+	{ MODKEY|ShiftMask,      -1,        XK_s,      spawn,          CMD("scrot -s -F '/home/archie/Pictures/Scrot/'  -e 'xclip -selection clipboard -t 'image/png' < $f'") },
+	{ MODKEY|ShiftMask,      -1,        XK_t,      spawn,          CMD("telegram-desktop") },
+
     /* Keybindings for programs using the format SUPER + ALT + "key" */
-	{ MODKEY|Mod1Mask,      -1,        XK_s,      spawn,          CMD("tabbed -r 2 surf -pe x '.surf/html/homepage.html'") },
-	{ MODKEY|Mod1Mask,      -1,        XK_b,      spawn,          CMD("brave") },
-	{ MODKEY|Mod1Mask,      -1,        XK_m,      spawn,          CMD("mailspring") },
-	{ MODKEY|Mod1Mask,      -1,        XK_f,      spawn,          CMD("pcmanfm") },
-	
-    /* Dmenu scripts launched with emacs-style keychords SUPER + p followed by "key" */
-	{ MODKEY,               XK_p,      XK_e,      spawn,          CMD("./dmscripts/dm-confedit") },
-	{ MODKEY,               XK_p,      XK_i,      spawn,          CMD("./dmscripts/dm-maim") },
-	{ MODKEY,               XK_p,      XK_k,      spawn,          CMD("./dmscripts/dm-kill") },
-	{ MODKEY,               XK_p,      XK_l,      spawn,          CMD("./dmscripts/dm-logout") },
-	{ MODKEY,               XK_p,      XK_m,      spawn,          CMD("./dmscripts/dm-man") },
-	{ MODKEY,               XK_p,      XK_r,      spawn,          CMD("./dmscripts/dm-reddit") },
-	{ MODKEY,               XK_p,      XK_s,      spawn,          CMD("./dmscripts/dm-websearch") },
-	{ MODKEY,               XK_p,      XK_p,      spawn,          CMD("passmenu") },
-    
-    /* Doom emacs keybindings use the keychord CTRL + e followed by "key" */
-	{ ControlMask,          XK_e,      XK_e,      spawn,          CMD("emacsclient -c -a 'emacs'") },
-	{ ControlMask,          XK_e,      XK_b,      spawn,          CMD("emacsclient -c -a 'emacs' --eval '(ibuffer)'") },
-	{ ControlMask,          XK_e,      XK_d,      spawn,          CMD("emacsclient -c -a 'emacs' --eval '(dired nil)'") },
-	{ ControlMask,          XK_e,      XK_m,      spawn,          CMD("emacsclient -c -a 'emacs' --eval '(mu4e)'") },
-	{ ControlMask,          XK_e,      XK_n,      spawn,          CMD("emacsclient -c -a 'emacs' --eval '(elfeed)'") },
-	{ ControlMask,          XK_e,      XK_s,      spawn,          CMD("emacsclient -c -a 'emacs' --eval '(eshell)'") },
-	{ ControlMask,          XK_e,      XK_v,      spawn,          CMD("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'") },
+	// { MODKEY|Mod1Mask,      -1,        XK_s,      spawn,          CMD("scrot -s -F '/home/archie/Pictures/Scrot/'  -e 'xclip -selection clipboard -t 'image/png' < $f'") },
+	// { MODKEY|Mod1Mask,      -1,        XK_f,      spawn,          CMD("pcmanfm") },	
 
 	TAGKEYS(                -1,        XK_1,                      0)
 	TAGKEYS(                -1,        XK_2,                      1)

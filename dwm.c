@@ -1546,8 +1546,8 @@ run(void)
 
 void
 runAutostart(void) {
-	system("cd /opt/dwm-distrotube-git; ./autostart_blocking.sh");
-	system("cd /opt/dwm-distrotube-git; ./autostart.sh &");
+	// system("cd /opt/dwm-distrotube-git; ./autostart_blocking.sh");
+	system("cd /home/.dwm; ./autostart.sh &");
 }
 
 void
