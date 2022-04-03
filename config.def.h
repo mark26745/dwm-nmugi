@@ -67,7 +67,7 @@ static const Rule rules[] = {
 	// Document Reader
 	{ "libreoffice",	NULL,		NULL,		1 << 4,		0,		-1 },
 	// Media Players
-	{ "cantata",		NULL,		NULL,		1 << 5,		0,		-1 },
+	{ "Quodlibet",		NULL,		NULL,		1 << 5,		0,		-1 },
 	{ "Parole",			NULL,		NULL,		1 << 5,		0,		-1 },
 	// Social Media 
 	{ "discord",		NULL,		NULL,		1 << 6,		0,		-1 },
@@ -109,7 +109,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 /* If you are using the standard dmenu program, use the following. */
 // Doing some ungodly stuff to hack rofi into dwm. Please research this
-static const char *dmenucmd[]    = { "rofi", "-show", "drun", NULL };
+static const char *dmenucmd[]    = { "rofi", "-show", "combi", NULL };
 // static const char *rofi[]    = { "rofi", "-show drun", NULL };
 /* If you are using the dmenu-distrotube-git program, use the following for a cooler dmenu! */
 /* static const char *dmenucmd[]    = { "dmenu_run", "-g", "10", "-l", "48", "-p", "Run: ", NULL }; */
@@ -141,12 +141,6 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,   -1,        XK_Return, zoom,           {0} },
 	{ MODKEY,               -1,        XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,     -1,        XK_c,      killclient,     {0} },
-
-    /* Layout manipulation */
-	{ MODKEY,               -1,        XK_Tab,    cyclelayout,    {.i = -1 } },
-	{ MODKEY|ShiftMask,     -1,        XK_Tab,    cyclelayout,    {.i = +1 } },
-	{ MODKEY,               -1,        XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,     -1,        XK_space,  togglefloating, {0} },
 
     /* Switch to specific layouts */
 	{ MODKEY,               -1,        XK_t,      setlayout,      {.v = &layouts[0]} },
