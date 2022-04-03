@@ -63,11 +63,10 @@ static const Rule rules[] = {
 	// Dev tools
 	{ "code-oss",		NULL,		NULL,		1 << 2,		0,		-1 },
 	// Browsers
-	{ "firefox",		NULL,		NULL,		1 << 3,		0,		-1 },
+	{ "Brave-browser-nightly",		NULL,		NULL,		1 << 3,		0,		-1 },
 	// Document Reader
 	{ "libreoffice",	NULL,		NULL,		1 << 4,		0,		-1 },
 	// Media Players
-	{ "spotify",		NULL,		NULL,		1 << 5,		0,		-1 },
 	{ "cantata",		NULL,		NULL,		1 << 5,		0,		-1 },
 	{ "Parole",			NULL,		NULL,		1 << 5,		0,		-1 },
 	// Social Media 
@@ -109,7 +108,9 @@ static const Layout layouts[] = {
 /* dmenu */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 /* If you are using the standard dmenu program, use the following. */
-static const char *dmenucmd[]    = { "dmenu_run", "-p", "Run: ", NULL };
+// Doing some ungodly stuff to hack rofi into dwm. Please research this
+static const char *dmenucmd[]    = { "rofi", "-show", "drun", NULL };
+// static const char *rofi[]    = { "rofi", "-show drun", NULL };
 /* If you are using the dmenu-distrotube-git program, use the following for a cooler dmenu! */
 /* static const char *dmenucmd[]    = { "dmenu_run", "-g", "10", "-l", "48", "-p", "Run: ", NULL }; */
 
@@ -118,6 +119,11 @@ static const char *termcmd[]     = { "alacritty", NULL };
 /* An alternative way to launch st along with the fish shell */
 /* static const char *termcmd[]     = { "st", "-e fish", NULL }; */
 // static const char *tabtermcmd[]  = { "tabbed", "-r", "2", "st", "-w", "''", NULL };
+
+// Media controls
+static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
 
 static Key keys[] = {
 	/* modifier             chain key  key        function        argument */
@@ -156,14 +162,15 @@ static Key keys[] = {
 	{ MODKEY,               -1,        XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,     -1,        XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,     -1,        XK_period, tagmon,         {.i = +1 } },
+	
+	// Adding media and brightness control
+	{ MODKEY,               -1,     XK_F5,  spawn, {.v = mutevol } },
+  	{ MODKEY,               -1,     XK_F6, spawn, {.v = downvol } },
+	{ MODKEY,               -1,     XK_F7, spawn, {.v = upvol   } },
 
 	/*Keybindings for SUPER + Shift + Key*/
 	{ MODKEY|ShiftMask,      -1,        XK_d,      spawn,          CMD("discord") },
-	{ MODKEY|ShiftMask,      -1,        XK_e,      spawn,          CMD("thunar") },
-	{ MODKEY|ShiftMask,      -1,        XK_f,      spawn,          CMD("firefox") },
-	{ MODKEY|ShiftMask,      -1,        XK_k,      spawn,          CMD("keepassxc") },
-	{ MODKEY|ShiftMask,      -1,        XK_m,      spawn,          CMD("cantata") },
-	{ MODKEY|ShiftMask,      -1,        XK_o,      spawn,          CMD("obsidian") },
+	{ MODKEY|ShiftMask,      -1,        XK_b,      spawn,          CMD("brave-nightly") },
 	{ MODKEY|ShiftMask,      -1,        XK_s,      spawn,          CMD("scrot -s -F '/home/archie/Pictures/Scrot/'  -e 'xclip -selection clipboard -t 'image/png' < $f'") },
 	{ MODKEY|ShiftMask,      -1,        XK_t,      spawn,          CMD("telegram-desktop") },
 
