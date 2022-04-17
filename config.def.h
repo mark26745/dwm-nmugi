@@ -18,10 +18,11 @@ static const int vertpadbar        = 7;   /* vertical padding for statusbar */
  * Arch repos and is listed as a dependency for this build. JoyPixels is also
  * a hard dependency and makes colored fonts and emojis possible.
  */
-static const char *fonts[]     = {"SauceCodePro Nerd Font Mono:weight=bold:size=9:antialias=true:hinting=true",
-	                              "Mononoki:size=9:antialias=true:autohint=true",
-                                  "Hack:size=8:antialias=true:autohint=true",
-                                  "JoyPixels:size=10:antialias=true:autohint=true"
+static const char *fonts[]     = {
+    "Hack:size=8:antialias=true:autohint=true",
+	"SauceCodePro Nerd Font Mono:weight=bold:size=9:antialias=true:hinting=true",
+	"Mononoki:size=9:antialias=true:autohint=true",
+    "JoyPixels:size=10:antialias=true:autohint=true"
 						     	};
 static const char col_1[]  = "#282c34"; /* background color of bar */
 static const char col_2[]  = "#282c34"; /* border color unfocused windows */
@@ -59,23 +60,22 @@ static const char *tags[] = { "zen", "sys", "dev", "www", "doc", "media", "chat"
 static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	// Day planners
-	{ "obsidian",		NULL,		NULL,		1,			0,		-1 },
 	// Dev tools
-	{ "code-oss",		NULL,		NULL,		1 << 2,		0,		-1 },
+	{ "vscodium",		NULL,		NULL,		1 << 2,		0,		-1 },
+	{"KeePassXC",		NULL,		NULL,		0,		1,		-1},
 	// Browsers
-	{ "Brave-browser-nightly",		NULL,		NULL,		1 << 3,		0,		-1 },
+	{ "Brave-browser-nightly",NULL,		NULL,		1 << 3,		0,		-1 },
 	// Document Reader
 	{ "libreoffice",	NULL,		NULL,		1 << 4,		0,		-1 },
 	// Media Players
-	{ "Quodlibet",		NULL,		NULL,		1 << 5,		0,		-1 },
-	{ "Parole",			NULL,		NULL,		1 << 5,		0,		-1 },
+	{ "Parole",		NULL,		NULL,		1 << 5,		0,		-1 },
 	// Social Media 
 	{ "discord",		NULL,		NULL,		1 << 6,		0,		-1 },
-	{ "TelegramDesktop",NULL,		NULL,		1 << 6,		0,		-1 },
+	{ "TelegramDesktop",	NULL,		NULL,		1 << 6,		0,		-1 },
 	// Arr
 	{ "qBittorrent",	NULL,		NULL,		1<<7,		0,		-1 },
 	// gfx
-	{ "Gimp",			NULL,		NULL,		1<<8,		0,		-1 },
+	{ "Gimp",		NULL,		NULL,		1<<8,		0,		-1 },
 };
 
 /* layout(s) */
@@ -163,10 +163,10 @@ static Key keys[] = {
 	{ MODKEY,               -1,     XK_F7, spawn, {.v = upvol   } },
 
 	/*Keybindings for SUPER + Shift + Key*/
-	{ MODKEY|ShiftMask,      -1,        XK_d,      spawn,          CMD("discord") },
-	{ MODKEY|ShiftMask,      -1,        XK_b,      spawn,          CMD("brave-nightly") },
-	{ MODKEY|ShiftMask,      -1,        XK_s,      spawn,          CMD("scrot -s -F '/home/archie/Pictures/Scrot/'  -e 'xclip -selection clipboard -t 'image/png' < $f'") },
-	{ MODKEY|ShiftMask,      -1,        XK_t,      spawn,          CMD("telegram-desktop") },
+	// { MODKEY|ShiftMask,      -1,        XK_d,      spawn,          CMD("discord") },
+	// { MODKEY|ShiftMask,      -1,        XK_b,      spawn,          CMD("brave-nightly") },
+	// { MODKEY|ShiftMask,      -1,        XK_s,      spawn,          CMD("scrot -s -F '/home/archie/Pictures/Scrot/'  -e 'xclip -selection clipboard -t 'image/png' < $f'") },
+	// { MODKEY|ShiftMask,      -1,        XK_t,      spawn,          CMD("telegram-desktop") },
 
     /* Keybindings for programs using the format SUPER + ALT + "key" */
 	// { MODKEY|Mod1Mask,      -1,        XK_s,      spawn,          CMD("scrot -s -F '/home/archie/Pictures/Scrot/'  -e 'xclip -selection clipboard -t 'image/png' < $f'") },

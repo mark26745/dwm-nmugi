@@ -40,9 +40,7 @@ Keybinding| Action
 |------------------------|-------------------------|
 | MODKEY + d             | row layout              |
 | MODKEY + i             | column layout           |
-| MODKEY + TAB           | cycle layout (-1)       |
 | MODKEY + SHIFT + TAB   | cycle layout (+1)       |
-| MODKEY + SPACE         | change layout           |
 | MODKEY + SHIFT + SPACE | toggle floating windows |
 | MODKEY + t             | layout 1                |
 | MODKEY + f             | layout 2                |
@@ -54,13 +52,7 @@ Keybinding| Action
 Keybinding |Action
 ------|------
 MODKEY + SHIFT + d | Open Discord
-MODKEY + SHIFT + e | Open File Browser : Thunar
-MODKEY + SHIFT + f | Open Browser : Firefox
-MODKEY + SHIFT + k | Open Password manager : Keepass
-MODKEY + SHIFT + m | Open Music player : Cantata
-MODKEY + SHIFT + o | Open Second Brain : Obsidian
-MODKEY + SHIFT + s | Utility : Screenshot - Scrot
-MODKEY + SHIFT + t | Open Telegram
+
 
 ## Misc 
 
